@@ -1,6 +1,6 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -24,32 +24,36 @@ const KudoForm = () => (
                 <Modal.Body>
                     <Form>
                         <Container>
-                            <Row>
-                                <Col xs sm={3} md={3} lg={3} xl={3}>
-                                    <select onChange={context.handleChange} name="sender" id="sendSender" defaultValue="Select Sender">
-                                        <option selected disabled value>Select Sender</option>
+                            <Form.Row>
+                                <Form.Group as={Col} xs sm={3} md={3} lg={3} xl={3}>
+                                    <Form.Control as="select" onChange={context.handleUserChange} name="sender" id="sendSender" defaultValue="Select Sender">
+                                        <option selected={true} disabled={false} value="">Select Sender</option>
                                         {context.users.map(user => (
-                                            <option val={user._id}>{user.Name}</option>
+                                            <option value={user._id}>{user.Name}</option>
                                         ))}
-                                    </select>
-                                </Col>
-                                <Col xs sm={5} md={5} lg={5} xl={5}>
-                                    <input onChange={context.handleChange} name="title" type="text" id="sendTitle" placeholder="Type a title!" />
-                                    <textarea onChange={context.handleChange} name="body" type="text" id="sendBody" rows="5"
-                                        placeholder="Type a Message!"></textarea>
-                                </Col>
-                                <Col xs sm={3} md={3} lg={3} xl={3}>
-                                    <select onChange={context.handleChange} name="receiver" id="sendReceiver" defaultValue="Select Receiver">
-                                        <option selected disabled value>Select Receiver</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col} xs sm={5} md={5} lg={5} xl={5}>
+                                    <Form.Control as="input" onChange={context.handleTextChange} name="title" type="text" id="sendTitle" placeholder="Type a title!" />
+                                    <Form.Control as="textarea" onChange={context.handleTextChange} name="body" type="text" id="sendBody" rows="5"
+                                        placeholder="Type a Message!"></Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col} xs sm={3} md={3} lg={3} xl={3}>
+                                    <Form.Control as="select" onChange={context.handleUserChange} name="receiver" id="sendReceiver" defaultValue="Select Receiver">
+                                        <option selected={true} disabled={false} value="">Select Receiver</option>
                                         {context.users.map(user => (
-                                            <option val={user._id}>{user.Name}</option>
+                                            <option value={user._id}>{user.Name}</option>
                                         ))}
-                                    </select>
-                                </Col>
-                            </Row>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
                         </Container>
                     </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={context.toggleForm}>Close</Button>
+                    <Button variant="primary" onClick={context.sendKudo}>Send</Button>
+                </Modal.Footer>
             </Modal>
         )}
     </Consumer>
