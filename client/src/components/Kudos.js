@@ -7,7 +7,7 @@ const Kudos = (props) => (
     <Col className="kudos">
         <Consumer>
             {context => context.kudos.map(kudo => (
-                <Row>
+                <Row className="kudoRow">
                     <Col className="eachKudo">
                         <h1 className="kudoTitle">{kudo.title}</h1>
                         <h2 className="sender">From: {kudo.sender[0].Name}</h2>
