@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 
 
-mongoose.connect("mongodb://localhost/kudoTest", { useNewUrlParser: true, useMongoClient: true }).then(function(){
+mongoose.connect("mongodb://localhost/kudoTest", { useNewUrlParser: true}).then(function(){
   console.log("connected to db");
 });
 

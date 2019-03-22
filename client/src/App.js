@@ -36,19 +36,21 @@ class App extends Component {
 
   handleTextChange = (e) => {
     this.setState({
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     });
   }
 
   handleUserChange = (e) => {
     console.log(e.target);
     this.setState({
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
   toggleForm = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     if (this.state.modalState) {
       this.setState({
         modalState: false
@@ -61,9 +63,9 @@ class App extends Component {
   }
 
   sendKudo = (e) => {
-    const {sender, receiver, title, body} = this.state;
+    const { sender, receiver, title, body } = this.state;
     e.preventDefault();
-    if(sender && receiver && title && body){
+    if (sender && receiver && title && body) {
       axios.post('/api/kudo', {
         sender: sender,
         title: title,
@@ -86,15 +88,17 @@ class App extends Component {
 
   render() {
     return (
-      <Provider value={{ kudos: this.state.kudos,
-                        toggleForm: this.toggleForm,
-                        modalState: this.state.modalState,
-                        handleTextChange: this.handleTextChange,
-                        handleUserChange: this.handleUserChange,
-                        users: this.state.users,
-                        sendKudo: this.sendKudo }}>
+      <Provider value={{
+        kudos: this.state.kudos,
+        toggleForm: this.toggleForm,
+        modalState: this.state.modalState,
+        handleTextChange: this.handleTextChange,
+        handleUserChange: this.handleUserChange,
+        users: this.state.users,
+        sendKudo: this.sendKudo
+      }}>
         <Home />
-        <KudoForm/>
+        <KudoForm />
       </Provider>
     );
   }
